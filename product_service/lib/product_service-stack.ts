@@ -1,7 +1,8 @@
-import * as cdk from 'aws-cdk-lib/core';
+import * as cdk from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs';
 import * as apigateway from 'aws-cdk-lib/aws-apigateway';
+import * as lambda from 'aws-cdk-lib/aws-lambda';
 import * as path from 'path';
 
 export class ProductServiceStack extends cdk.Stack {
@@ -15,7 +16,7 @@ export class ProductServiceStack extends cdk.Stack {
       {
         entry: path.join(__dirname, '../src/handlers/getProductsList.ts'),
         handler: 'handler',
-        runtime: cdk.aws_lambda.Runtime.NODEJS_18_X,
+        runtime: lambda.Runtime.NODEJS_18_X,
         timeout: cdk.Duration.seconds(10),
       }
     );
@@ -27,7 +28,7 @@ export class ProductServiceStack extends cdk.Stack {
       {
         entry: path.join(__dirname, '../src/handlers/getProductsById.ts'),
         handler: 'handler',
-        runtime: cdk.aws_lambda.Runtime.NODEJS_18_X,
+        runtime: lambda.Runtime.NODEJS_18_X,
         timeout: cdk.Duration.seconds(10),
       }
     );
