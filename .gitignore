@@ -1,0 +1,39 @@
+# Dependencies
+node_modules/
+.npm
+*.lock
+yarn.lock
+pnpm-lock.yaml
+
+# CDK
+cdk.out/
+.cdk.staging/
+*.d.ts
+*.js
+!jest.config.js
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Environment
+.env
+.env.local
+.DS_Store
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# Build outputs
+dist/
+build/
+.next/
+
+# OS
+.DS_Store
+Thumbs.db
