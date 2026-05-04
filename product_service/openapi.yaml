@@ -1,0 +1,145 @@
+openapi: 3.0.0
+info:
+  title: Product Service API
+  description: |
+    AWS Product Service API for managing and retrieving product information.
+    Built with AWS Lambda, API Gateway, and CDK.
+  version: 1.0.0
+  contact:
+    name: AWS Shop Team
+
+servers:
+  - url: https://cjif0xgg5j.execute-api.eu-west-1.amazonaws.com/prod
+    description: Production environment
+
+paths:
+  /products:
+    get:
+      summary: Get all products
+      description: |
+        Retrieves a complete list of all available products.
+        Returns an array of product objects with their details.
+      operationId: getProductsList
+      tags:
+        - Products
+      responses:
+        '200':
+          description: Successfully retrieved all products
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+              example:
+                - id: '1'
+                  title: 'Wireless Headphones'
+                  description: 'High-quality wireless headphones with noise cancellation'
+                  price: 199.99
+                - id: '2'
+                  title: 'Laptop Stand'
+                  description: 'Ergonomic aluminum laptop stand for better posture'
+                  price: 49.99
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /products/{productId}:
+    get:
+      summary: Get a product by ID
+      description: |
+        Retrieves a single product by its unique identifier.
+        Returns a 404 error if the product does not exist.
+      operationId: getProductsById
+      tags:
+        - Products
+      parameters:
+        - name: productId
+          in: path
+          description: The unique identifier of the product
+          required: true
+          schema:
+            type: string
+          example: '1'
+      responses:
+        '200':
+          description: Successfully retrieved the product
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+              example:
+                id: '1'
+                title: 'Wireless Headphones'
+                description: 'High-quality wireless headphones with noise cancellation'
+                price: 199.99
+        '400':
+          description: Bad request - Product ID is required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                error: 'Product ID is required'
+        '404':
+          description: Product not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                error: 'Product not found'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+components:
+  schemas:
+    Product:
+      type: object
+      description: Represents a product in the catalog
+      required:
+        - id
+        - title
+        - description
+        - price
+      properties:
+        id:
+          type: string
+          description: Unique product identifier
+          example: '1'
+        title:
+          type: string
+          description: Product name/title
+          example: 'Wireless Headphones'
+        description:
+          type: string
+          description: Detailed description of the product
+          example: 'High-quality wireless headphones with noise cancellation'
+        price:
+          type: number
+          format: double
+          description: Product price in USD
+          example: 199.99
+          minimum: 0
+
+    Error:
+      type: object
+      description: Error response object
+      required:
+        - error
+      properties:
+        error:
+          type: string
+          description: Error message describing what went wrong
+          example: 'Product not found'
+
+tags:
+  - name: Products
+    description: Operations for managing products
