@@ -1,0 +1,25 @@
+{
+  "name": "product_service",
+  "version": "0.1.0",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "test": "jest",
+    "cdk": "cdk"
+  },
+  "devDependencies": {
+    "@types/jest": "^30",
+    "@types/node": "^24.10.1",
+    "aws-cdk": "2.1120.0",
+    "jest": "^30",
+    "ts-jest": "^29",
+    "ts-node": "^10.9.2",
+    "typescript": "~5.9.3"
+  },
+  "dependencies": {
+    "@aws-cdk/aws-apigateway": "^1.19.0",
+    "@aws-cdk/aws-lambda-nodejs": "^1.32.2",
+    "aws-cdk-lib": "^2.251.0",
+    "constructs": "^10.5.0"
+  }
+}

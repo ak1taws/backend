@@ -1,0 +1,36 @@
+*.js
+!jest.config.js
+*.d.ts
+node_modules
+.npm
+*.lock
+yarn.lock
+pnpm-lock.yaml
+
+# CDK asset staging directory
+.cdk.staging
+cdk.out
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Environment
+.env
+.env.local
+.DS_Store
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# Build outputs
+dist/
+build/
+
+# OS
+Thumbs.db
